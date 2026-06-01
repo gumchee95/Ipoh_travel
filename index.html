@@ -1,0 +1,188 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta
+      name="description"
+      content="Ipoh Route Card Guide / 怡保顺路游 is a static card-based travel route database for exploring nearby Ipoh places."
+    />
+    <title>Ipoh Route Card Guide / 怡保顺路游</title>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <header class="hero">
+      <nav class="topbar" aria-label="Main navigation">
+        <a class="brand" href="#top" aria-label="Ipoh Route Card Guide home">
+          <span class="brand-mark">怡</span>
+          <span>
+            <strong>Ipoh Route Card Guide</strong>
+            <small>怡保顺路游</small>
+          </span>
+        </a>
+        <div class="nav-links">
+          <a href="#routes">Routes</a>
+          <a href="#places">Places</a>
+          <a href="#graph">Graph</a>
+        </div>
+      </nav>
+
+      <section id="top" class="hero-grid">
+        <div class="hero-copy">
+          <p class="eyebrow">No blog. No wiki. Just route logic.</p>
+          <h1>Pick one Ipoh card. See what is nearby, why it fits, and how to go.</h1>
+          <p class="hero-text">
+            A lightweight route database for coffee stops, heritage lanes, cave temples, food crawls,
+            and night walks around Ipoh.
+          </p>
+          <div class="hero-actions">
+            <a class="button button-primary" href="#places">Explore cards</a>
+            <a class="button button-ghost" href="#routes">Use preset route</a>
+          </div>
+        </div>
+
+        <aside class="hero-ticket" aria-label="Sample Ipoh route ticket">
+          <div class="ticket-stamp">顺路</div>
+          <p>Start Node</p>
+          <h2 id="heroActiveName">Ipoh Railway Station</h2>
+          <div class="mini-map" aria-hidden="true">
+            <span>🚉</span>
+            <i></i>
+            <span>☕</span>
+            <i></i>
+            <span>🏮</span>
+          </div>
+          <small>Pick any place card below to instantly redraw nearby recommendations.</small>
+        </aside>
+      </section>
+    </header>
+
+    <main>
+      <section class="section about" id="about">
+        <div>
+          <p class="eyebrow">About this guide</p>
+          <h2>Designed for “what should I do next?” moments.</h2>
+        </div>
+        <p>
+          Each place stores practical route metadata: nearby recommendations, distance notes,
+          transport mode, cost, timing, parking, weather notes, and a Google Maps link. The site
+          runs fully static and can optionally load public Google Sheet CSV data.
+        </p>
+      </section>
+
+      <section class="section" id="routes">
+        <div class="section-heading">
+          <div>
+            <p class="eyebrow">Preset itineraries</p>
+            <h2>Route cards for common Ipoh moods</h2>
+          </div>
+          <p class="muted">Open a preset to inspect its stops, then jump into the graph.</p>
+        </div>
+        <div class="preset-grid" id="presetRoutes" aria-live="polite"></div>
+      </section>
+
+      <section class="section controls-section" aria-labelledby="filters-title">
+        <div class="section-heading compact">
+          <div>
+            <p class="eyebrow">Find a node</p>
+            <h2 id="filters-title">Search and filter route cards</h2>
+          </div>
+          <div class="data-pill" id="dataStatus">Loading guide data...</div>
+        </div>
+
+        <div class="controls">
+          <label class="search-box">
+            <span>Search</span>
+            <input id="searchInput" type="search" placeholder="Try coffee, night, cave, mural..." />
+          </label>
+
+          <label>
+            <span>Area</span>
+            <select id="areaFilter">
+              <option value="all">All areas</option>
+            </select>
+          </label>
+
+          <label>
+            <span>Time</span>
+            <select id="timeFilter">
+              <option value="all">Any time</option>
+            </select>
+          </label>
+
+          <label>
+            <span>Cost</span>
+            <select id="costFilter">
+              <option value="all">Any cost</option>
+            </select>
+          </label>
+
+          <label>
+            <span>Type</span>
+            <select id="typeFilter">
+              <option value="all">Any type</option>
+            </select>
+          </label>
+
+          <button class="button button-reset" id="resetFilters" type="button">Reset</button>
+        </div>
+        <div class="active-filters" id="activeFilters" aria-live="polite"></div>
+      </section>
+
+      <section class="section split-layout" id="places">
+        <div id="placesListPanel">
+          <div class="section-heading compact">
+            <div>
+              <p class="eyebrow">Place cards</p>
+              <h2>Choose your route anchor</h2>
+            </div>
+            <p class="result-count" id="resultCount">0 places</p>
+          </div>
+          <div class="cards-grid" id="placesGrid" aria-live="polite"></div>
+          <div class="empty-state" id="emptyState" hidden>
+            <strong>No matching places.</strong>
+            <span>Try clearing one filter or searching a broader term.</span>
+          </div>
+        </div>
+
+        <section class="route-panel" id="graph" aria-live="polite" hidden>
+          <div class="route-panel-head">
+            <p class="eyebrow">Route flow</p>
+            <h2 id="activePlaceTitle">Select a place</h2>
+            <p id="activePlaceDesc">Click any connected point to see why it is next, then continue from that place.</p>
+          </div>
+          <button class="button button-reset" id="backToList" type="button">Back to place cards</button>
+          <div class="active-meta" id="activeMeta"></div>
+          <div class="route-panel-actions">
+            <a class="button button-ghost" id="activeMapLink" href="#" target="_blank" rel="noopener noreferrer">Open active place map</a>
+          </div>
+          <div class="node-graph" id="nodeGraph"></div>
+        </section>
+      </section>
+    </main>
+
+    <footer class="footer">
+      <strong>Ipoh Route Card Guide / 怡保顺路游</strong>
+      <p>
+        Disclaimer: Route notes, costs, opening context, and distances are planning estimates only.
+        Check current conditions, business hours, weather, and transport availability before travel.
+        Google Maps links open externally and do not use a Maps API.
+      </p>
+    </footer>
+
+    <div class="modal" id="routeModal" hidden>
+      <div class="modal-backdrop" data-close-modal></div>
+      <section class="modal-card" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
+        <button class="modal-close" type="button" data-close-modal aria-label="Close route modal">×</button>
+        <p class="eyebrow">Preset route</p>
+        <h2 id="modalTitle"></h2>
+        <p id="modalSummary"></p>
+        <div class="modal-tags" id="modalTags"></div>
+        <ol class="modal-stops" id="modalStops"></ol>
+      </section>
+    </div>
+
+    <script src="places.js"></script>
+    <script src="script.js"></script>
+  </body>
+</html>

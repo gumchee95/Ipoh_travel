@@ -1,0 +1,740 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>探索怡保 - 美食与历史之城 V1.1</title>
+    <style>
+        /* 游客导向的温暖色调 - 激发食欲和探索欲 */
+        :root {
+            --primary: #d35400; /* 怡保白咖啡/红砖的温暖色调 */
+            --secondary: #e67e22;
+            --bg-light: #fdfbf7;
+            --bg-graph: #f4f0ea;
+            --text-dark: #2c3e50;
+            --text-gray: #7f8c8d;
+            --card-bg: #ffffff;
+            --radius: 16px;
+            --shadow: 0 10px 30px rgba(0,0,0,0.08);
+            --transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        body {
+            font-family: 'Segoe UI', -apple-system, Roboto, Helvetica, Arial, sans-serif;
+            background-color: var(--bg-light);
+            color: var(--text-dark);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        /* 吸引眼球的英雄区域 */
+        .hero {
+            background: linear-gradient(135deg, rgba(211,84,0,0.9) 0%, rgba(230,126,34,0.8) 100%), 
+                        url('https://images.unsplash.com/photo-1596422846543-75c6fc197f07?auto=format&fit=crop&w=1200&q=80') center/cover;
+            color: white;
+            padding: 4rem 1.5rem;
+            text-align: center;
+            border-bottom-left-radius: 30px;
+            border-bottom-right-radius: 30px;
+            box-shadow: 0 4px 20px rgba(211,84,0,0.2);
+        }
+
+        .hero h1 { font-size: 2.5rem; margin-bottom: 1rem; font-weight: 800; letter-spacing: 1px; }
+        .hero p { font-size: 1.1rem; max-width: 600px; margin: 0 auto; opacity: 0.9; }
+
+        /* 主体内容包裹 */
+        .main-content {
+            max-width: 1100px;
+            margin: 0 auto;
+            padding: 2rem 1.5rem;
+        }
+
+        /* 精选路线推荐区 */
+        .itinerary-section {
+            margin: -4rem auto 2rem;
+            position: relative;
+            z-index: 10;
+        }
+
+        .itinerary-cards {
+            display: flex;
+            gap: 1rem;
+            overflow-x: auto;
+            padding-bottom: 1rem;
+            scrollbar-width: none;
+        }
+        .itinerary-cards::-webkit-scrollbar { display: none; }
+
+        .route-card {
+            background: var(--card-bg);
+            min-width: 280px;
+            padding: 1.5rem;
+            border-radius: var(--radius);
+            box-shadow: var(--shadow);
+            cursor: pointer;
+            border-left: 5px solid var(--primary);
+            transition: var(--transition);
+        }
+        .route-card:hover { transform: translateY(-5px); }
+        .route-card h3 { color: var(--primary); margin-bottom: 0.5rem; }
+        .route-card p { font-size: 0.9rem; color: var(--text-gray); }
+
+        .section-title { font-size: 1.8rem; margin-bottom: 1.5rem; color: var(--text-dark); font-weight: bold;}
+        
+        .filters-container {
+            display: flex; flex-direction: column; gap: 1rem; margin-bottom: 2rem;
+            background: white; padding: 1.5rem; border-radius: var(--radius); box-shadow: 0 4px 15px rgba(0,0,0,0.03);
+        }
+        
+        .search-area { display: flex; gap: 1rem; flex-wrap: wrap; }
+        .search-input { 
+            flex: 1; min-width: 200px; padding: 0.8rem 1.2rem; 
+            border: 1px solid #e0e0e0; border-radius: 30px; outline: none; font-size: 1rem;
+        }
+        .search-input:focus { border-color: var(--primary); }
+        
+        .area-select {
+            padding: 0.8rem 1.2rem; border: 1px solid #e0e0e0; border-radius: 30px; 
+            outline: none; font-size: 1rem; background: white; min-width: 150px;
+        }
+
+        .filters { display: flex; gap: 0.6rem; flex-wrap: wrap; }
+        .filter-btn {
+            background: #f5f6fa; border: none; padding: 0.6rem 1.2rem; border-radius: 30px;
+            font-weight: 600; color: var(--text-gray); cursor: pointer; transition: var(--transition);
+            font-size: 0.9rem;
+        }
+        .filter-btn.active, .filter-btn:hover { background: var(--primary); color: white; }
+
+        /* 景点卡片网格 */
+        .grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(320px, 1fr)); gap: 1.5rem; }
+
+        .place-card {
+            background: var(--card-bg); border-radius: var(--radius); overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.05); transition: var(--transition);
+            display: flex; flex-direction: column; cursor: pointer;
+        }
+        .place-card:hover { box-shadow: var(--shadow); transform: translateY(-3px); }
+
+        .card-img-placeholder {
+            height: 160px; background: #ddd; display: flex; align-items: center; justify-content: center;
+            font-size: 3.5rem; color: #fff;
+        }
+
+        .card-body { padding: 1.5rem; flex-grow: 1; display: flex; flex-direction: column; }
+        .card-header { display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 0.5rem; }
+        
+        .place-title { font-size: 1.3rem; margin-bottom: 0.1rem; color: var(--text-dark); }
+        .place-title-en { font-size: 0.85rem; color: #a4b0be; }
+        .duration-badge { font-size: 0.8rem; background: #eee; padding: 0.2rem 0.6rem; border-radius: 20px; color: var(--text-gray); }
+        
+        /* 元数据标签 (成本, 验证) */
+        .meta-data { font-size: 0.75rem; color: var(--text-gray); margin-bottom: 0.8rem; display: flex; gap: 10px; flex-wrap: wrap; }
+        .meta-item { display: flex; align-items: center; gap: 4px; }
+
+        .card-tags { display: flex; gap: 0.4rem; margin: 0.8rem 0; flex-wrap: wrap;}
+        .tag { background: #ffeaa7; color: #d35400; font-size: 0.75rem; padding: 0.2rem 0.6rem; border-radius: 4px; font-weight: bold;}
+        .tag.area-tag { background: #e3f2fd; color: #1976d2; }
+        
+        /* 游玩时间段标签 */
+        .time-tag { font-size: 0.75rem; padding: 0.2rem 0.6rem; border-radius: 4px; font-weight: bold; margin-right: 0.4rem; display: inline-block;}
+        .time-morning { background: #fff3e0; color: #e67e22; }
+        .time-afternoon { background: #e8f5e9; color: #2e7d32; }
+        .time-night { background: #ede7f6; color: #512da8; }
+
+        .place-desc { font-size: 0.95rem; color: var(--text-gray); margin-bottom: 1.5rem; line-height: 1.5; }
+        
+        .card-actions { display: flex; gap: 0.8rem; margin-top: auto; }
+        .btn { 
+            flex: 1; text-align: center; padding: 0.6rem; border-radius: 8px; font-size: 0.9rem;
+            font-weight: bold; cursor: pointer; border: none; transition: var(--transition); text-decoration: none;
+        }
+        .btn-primary { background: var(--primary); color: white; }
+        .btn-primary:hover { background: var(--secondary); }
+        .btn-outline { background: transparent; border: 1px solid #bdc3c7; color: var(--text-gray); }
+        .btn-outline:hover { border-color: var(--primary); color: var(--primary); }
+
+        /* 动态关联路线图 (Obsidian 概念) */
+        .graph-section {
+            display: none; /* 默认隐藏 */
+            margin-top: 1rem; padding: 2rem 1.5rem; background: var(--bg-graph);
+            border-radius: var(--radius); text-align: center;
+            box-shadow: inset 0 5px 20px rgba(0,0,0,0.03);
+            animation: fadeIn 0.5s ease;
+        }
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+
+        .graph-header-controls { display: flex; justify-content: space-between; align-items: center; margin-bottom: 2rem; }
+        .btn-back { background: var(--text-dark); color: white; border: none; padding: 0.6rem 1.2rem; border-radius: 30px; cursor: pointer; font-weight: bold; transition: var(--transition);}
+        .btn-back:hover { background: #000; }
+        
+        .graph-title { font-size: 1.5rem; color: var(--primary); margin: 0; }
+        
+        /* 根节点 */
+        .root-node {
+            background: white; border: 3px solid var(--primary); padding: 1.5rem;
+            border-radius: var(--radius); max-width: 450px; margin: 0 auto 3rem;
+            box-shadow: 0 10px 25px rgba(211,84,0,0.15); position: relative; z-index: 2;
+        }
+        .root-node h3 { margin-bottom: 0.3rem; font-size: 1.5rem;}
+        
+        /* 时间分支网格 */
+        .time-branches {
+            display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 2rem;
+            position: relative;
+        }
+        
+        /* 连接线 (Root到分支) */
+        .time-branches::before {
+            content: ''; position: absolute; top: -3rem; left: 50%; transform: translateX(-50%);
+            width: 2px; height: 3rem; background: var(--primary); z-index: 1;
+        }
+
+        .time-branch {
+            background: rgba(255,255,255,0.5); border-radius: var(--radius); padding: 1.5rem;
+            border-top: 4px solid var(--primary);
+        }
+        .time-branch.morning { border-top-color: #f39c12; }
+        .time-branch.afternoon { border-top-color: #27ae60; }
+        .time-branch.night { border-top-color: #8e44ad; }
+
+        .branch-title { font-size: 1.1rem; font-weight: bold; margin-bottom: 1.5rem; display: flex; align-items: center; justify-content: center; gap: 0.5rem;}
+        
+        /* 关联节点 */
+        .connected-node {
+            background: white; border-radius: 12px; padding: 1rem; width: 100%;
+            margin-bottom: 1rem; box-shadow: 0 4px 10px rgba(0,0,0,0.05); position: relative; z-index: 2;
+            display: flex; flex-direction: column; text-align: left; 
+            cursor: pointer; transition: var(--transition); border: 1px solid #eee;
+        }
+        .connected-node:hover { transform: translateY(-3px); box-shadow: 0 8px 20px rgba(0,0,0,0.08); border-color: var(--primary);}
+        
+        /* 分支节点内部元素样式 */
+        .c-node-header { display: flex; justify-content: flex-start; align-items: center; margin-bottom: 0.3rem; }
+        .c-node-title { font-size: 1.1rem; font-weight: bold; color: var(--text-dark); display: flex; align-items: center; gap: 6px; }
+        .c-node-info { font-size: 0.85rem; color: var(--text-gray); margin-bottom: 0.5rem; }
+        .c-node-map { 
+            font-size: 0.8rem; color: var(--primary); text-decoration: none; 
+            padding: 0.3rem 0.6rem; border: 1px solid var(--primary); border-radius: 6px; transition: var(--transition);
+        }
+        .c-node-map:hover { background: var(--primary); color: white; }
+
+        /* 修正后的 Modal 样式 */
+        .modal {
+            display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+            background: rgba(0,0,0,0.6); backdrop-filter: blur(5px); z-index: 1000;
+            justify-content: center; align-items: center; padding: 1rem;
+        }
+        .modal.active { display: flex; animation: fadeIn 0.3s ease;}
+        
+        .modal-content {
+            background: var(--card-bg); width: 100%; max-width: 600px; border-radius: var(--radius);
+            padding: 2rem; position: relative; max-height: 90vh; overflow-y: auto;
+        }
+        .close-btn { position: absolute; top: 1rem; right: 1.5rem; font-size: 2rem; cursor: pointer; color: #ccc; border: none; background: transparent;}
+        
+        .timeline { margin-top: 2rem; position: relative; padding-left: 2rem; }
+        .timeline::before { content: ''; position: absolute; left: 7px; top: 0; height: 100%; width: 2px; background: #ffeaa7; }
+        .timeline-item { position: relative; margin-bottom: 2rem; }
+        .timeline-item::before {
+            content: ''; position: absolute; left: -2.3rem; top: 5px; width: 16px; height: 16px;
+            border-radius: 50%; background: var(--primary); border: 3px solid white; box-shadow: 0 0 0 2px var(--primary);
+        }
+        .time-badge { font-weight: bold; color: var(--primary); margin-bottom: 0.3rem; display: block; font-size: 0.9rem;}
+        .timeline-title { font-size: 1.2rem; font-weight: bold; margin-bottom: 0.3rem; }
+        .timeline-desc { font-size: 0.9rem; color: var(--text-gray); }
+
+    </style>
+</head>
+<body>
+
+    <!-- Hero Section -->
+    <header class="hero">
+        <h1>寻味怡保 · 节点漫游</h1>
+        <p>不再迷失在攻略中。点击任意地点，发现与其关联的美食与路线，打造你的专属知识图谱。</p>
+    </header>
+
+    <!-- Main Wrapper -->
+    <main class="main-content">
+        <!-- Itinerary Cards -->
+        <section class="itinerary-section">
+            <div class="itinerary-cards">
+                <div class="route-card" onclick="openRoute('foodie')">
+                    <h3>🍜 经典吃货半日游</h3>
+                    <p>完美串联旧街场的最强美食网络。</p>
+                </div>
+                <div class="route-card" onclick="openRoute('culture')">
+                    <h3>📸 文艺复古打卡线</h3>
+                    <p>穿梭百年建筑与文创巷弄。</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Filters Section -->
+        <section class="filters-container" id="filtersContainer">
+            <div class="search-area">
+                <input type="text" class="search-input" id="searchInput" placeholder="搜索地点名称、英文或描述...">
+                <select class="area-select" id="areaFilter">
+                    <option value="all">📍 所有区域</option>
+                    <option value="Old Town">旧街场 (Old Town)</option>
+                    <option value="New Town">新街场 (New Town)</option>
+                    <option value="Gunung Rapat">昆仑喇叭 (Gunung Rapat)</option>
+                </select>
+                <select class="area-select" id="timeFilter">
+                    <option value="all">🕒 所有时段</option>
+                    <option value="morning">🌅 适合早上</option>
+                    <option value="afternoon">☀️ 适合下午</option>
+                    <option value="night">🌙 适合晚上</option>
+                </select>
+            </div>
+            <div class="filters">
+                <button class="filter-btn active" data-type="all">全部精选</button>
+                <button class="filter-btn" data-type="food">🥢 必吃美食</button>
+                <button class="filter-btn" data-type="attraction">🏛️ 经典打卡</button>
+                <button class="filter-btn" data-type="nature">🍃 洞穴与自然</button>
+            </div>
+        </section>
+
+        <!-- List Title -->
+        <div class="section-title">探索地道好去处</div>
+
+        <!-- Grid -->
+        <div class="grid" id="placesGrid">
+            <!-- JS 注入卡片 -->
+        </div>
+
+        <!-- 关联路线图区域 (Obsidian-style Graph) -->
+        <section class="graph-section" id="graphSection">
+            <h2 class="graph-title">🔗 路线节点网络</h2>
+            <p style="color: var(--text-gray); margin-bottom: 2rem; font-size: 0.9rem;">
+                点击下方的关联节点，可以继续延展你的路线图。
+            </p>
+            <div id="graphContent">
+                <!-- 动态生成 Root 节点和 Connected 节点 -->
+            </div>
+        </section>
+    </main>
+
+    <!-- Itinerary Modal -->
+    <div class="modal" id="routeModal">
+        <div class="modal-content">
+            <button class="close-btn" onclick="closeModal()">&times;</button>
+            <h2 id="modalTitle" style="color: var(--primary);">路线规划</h2>
+            <p id="modalDesc" style="color: var(--text-gray); font-size: 0.9rem; margin-top: 0.5rem;"></p>
+            <div class="timeline" id="timelineContent">
+                <!-- JS 注入时间轴 -->
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // 核心地点数据库 (扩展了元数据字段)
+        const placesDb = [
+            {
+                id: 'p_namheong', type: 'food', area: 'Old Town', tags: ['必吃早餐', '老字号'],
+                timeSlots: ['morning'],
+                name: '南香白咖啡', nameEn: 'Nam Heong White Coffee', duration: '45 分钟',
+                desc: '怡保白咖啡的鼻祖之一。刚出炉的蛋挞配上一杯冰镇白咖啡，是怡保人最经典的早晨仪式。',
+                tip: '💡 周末早上8点后通常需要等位。',
+                mapUrl: 'https://maps.google.com/?q=Nam+Heong+White+Coffee+Ipoh',
+                imgEmoji: '☕',
+                connectedPlaces: ['p_concubine', 'p_ipoh_station', 'p_mural', 'p_funny_mountain'],
+                costStatus: '自费', estimatedCost: 'RM 5 - 15', category: '传统餐饮', lastVerified: '2026-05'
+            },
+            {
+                id: 'p_louwong', type: 'food', area: 'New Town', tags: ['排队名店', '正餐首选'],
+                timeSlots: ['afternoon', 'night'],
+                name: '老黄芽菜鸡沙河粉', nameEn: 'Lou Wong Bean Sprout Chicken', duration: '1 小时',
+                desc: '怡保地下水培育出的短胖芽菜，口感极其爽脆。搭配滑嫩的白斩鸡，绝配。',
+                tip: '💡 晚餐时段人潮汹涌，可搭配附近的甜品。',
+                mapUrl: 'https://maps.google.com/?q=Lou+Wong+Bean+Sprout+Chicken',
+                imgEmoji: '🍗',
+                connectedPlaces: ['p_tongsuikai', 'p_kinta_river', 'p_gerbang_malam'],
+                costStatus: '自费', estimatedCost: 'RM 15 - 30', category: '传统餐饮', lastVerified: '2026-05'
+            },
+            {
+                id: 'p_funny_mountain', type: 'food', area: 'New Town', tags: ['甜品小吃', '古早味'],
+                timeSlots: ['morning', 'afternoon'],
+                name: '奇峰豆腐花', nameEn: 'Funny Mountain Soya Bean', duration: '15 分钟',
+                desc: '入口即化的超滑嫩豆腐花，传统吃法是在车上Drive-thru，捧着碗吃。',
+                tip: '💡 分量不大，完全可以作为下午茶。',
+                mapUrl: 'https://maps.google.com/?q=Funny+Mountain+Soya+Bean',
+                imgEmoji: '🍮',
+                connectedPlaces: ['p_louwong', 'p_mural', 'p_tongsuikai'],
+                costStatus: '自费', estimatedCost: 'RM 2 - 5', category: '甜品小吃', lastVerified: '2026-05'
+            },
+            {
+                id: 'p_concubine', type: 'attraction', area: 'Old Town', tags: ['文艺街区', '拍照圣地'],
+                timeSlots: ['morning', 'afternoon'],
+                name: '二奶巷', nameEn: 'Concubine Lane', duration: '45 分钟',
+                desc: '昔日富商金屋藏娇的窄巷，如今摇身一变成为充满文创小店和手工艺品的活力街区。',
+                tip: '💡 建议上午去拍照，光线最好且人少。下午可以去吃冰。',
+                mapUrl: 'https://maps.google.com/?q=Concubine+Lane+Ipoh',
+                imgEmoji: '🏮',
+                connectedPlaces: ['p_namheong', 'p_market_lane', 'p_ipoh_station', 'p_louwong'],
+                costStatus: '免费', estimatedCost: '丰俭由人', category: '历史街区', lastVerified: '2026-05'
+            },
+            {
+                id: 'p_market_lane', type: 'attraction', area: 'Old Town', tags: ['文艺街区'],
+                timeSlots: ['morning', 'afternoon'],
+                name: '三奶巷', nameEn: 'Market Lane', duration: '30 分钟',
+                desc: '二奶巷的姐妹巷，天空悬挂着五颜六色的雨伞，墙上有着独特的壁画。',
+                tip: '💡 比二奶巷安静，适合慢慢拍照。',
+                mapUrl: 'https://maps.google.com/?q=Market+Lane+Ipoh',
+                imgEmoji: '🌂',
+                connectedPlaces: ['p_concubine', 'p_mural'],
+                costStatus: '免费', estimatedCost: '0', category: '历史街区', lastVerified: '2026-05'
+            },
+            {
+                id: 'p_ipoh_station', type: 'attraction', area: 'Old Town', tags: ['历史遗迹'],
+                timeSlots: ['morning', 'afternoon', 'night'],
+                name: '怡保火车站', nameEn: 'Ipoh Railway Station', duration: '30 分钟',
+                desc: '被誉为“怡保的泰姬陵”，摩尔式与维多利亚式混合的纯白建筑，见证“锡都”辉煌。',
+                tip: '💡 晚上广场会有灯光喷泉，日夜皆宜。',
+                mapUrl: 'https://maps.google.com/?q=Ipoh+Railway+Station',
+                imgEmoji: '🚉',
+                connectedPlaces: ['p_namheong', 'p_concubine', 'p_kinta_river'],
+                costStatus: '免费', estimatedCost: '0', category: '地标建筑', lastVerified: '2026-05'
+            },
+            {
+                id: 'p_mural', type: 'attraction', area: 'New Town', tags: ['艺术打卡'],
+                timeSlots: ['morning', 'afternoon'],
+                name: '怡保壁画街', nameEn: 'Mural Art’s Lane', duration: '45 分钟',
+                desc: '一整条巷子充满了反映马来西亚多元文化和童年记忆的大型壁画。',
+                tip: '💡 沿途无遮挡，注意防晒，建议避开正午。',
+                mapUrl: 'https://maps.google.com/?q=Mural+Arts+Lane+Ipoh',
+                imgEmoji: '🎨',
+                connectedPlaces: ['p_funny_mountain', 'p_market_lane', 'p_louwong'],
+                costStatus: '免费', estimatedCost: '0', category: '街头艺术', lastVerified: '2026-05'
+            },
+            {
+                id: 'p_kinta_river', type: 'nature', area: 'New Town', tags: ['休闲散步'],
+                timeSlots: ['night'],
+                name: '近打河畔', nameEn: 'Kinta Riverfront', duration: '1 小时',
+                desc: '风景优美的河畔步道，晚上树木会被霓虹灯点亮，非常适合晚饭后散步。',
+                tip: '💡 可以在这里租借自行车游览，享受晚风。',
+                mapUrl: 'https://maps.google.com/?q=Kinta+Riverfront+River+Walk',
+                imgEmoji: '🌉',
+                connectedPlaces: ['p_louwong', 'p_tongsuikai'],
+                costStatus: '免费', estimatedCost: '自行租车约 RM15', category: '城市景观', lastVerified: '2026-05'
+            },
+            {
+                id: 'p_tongsuikai', type: 'food', area: 'New Town', tags: ['宵夜甜品', '本地人推荐'],
+                timeSlots: ['night'],
+                name: '糖水街', nameEn: 'Tong Sui Kai', duration: '1 小时',
+                desc: '怡保著名的夜间美食街，几十档小贩聚集。杂果冰和各种传统糖水是必点。',
+                tip: '💡 傍晚6点后才开始热闹，是宵夜绝佳去处。',
+                mapUrl: 'https://maps.google.com/?q=Tong+Sui+Kai+Ipoh',
+                imgEmoji: '🍧',
+                connectedPlaces: ['p_louwong', 'p_kinta_river', 'p_gerbang_malam'],
+                costStatus: '自费', estimatedCost: 'RM 5 - 15', category: '夜市小吃', lastVerified: '2026-05'
+            },
+            {
+                id: 'p_gerbang_malam', type: 'attraction', area: 'New Town', tags: ['夜市购物'],
+                timeSlots: ['night'],
+                name: '夜市街', nameEn: 'Gerbang Malam', duration: '1 小时',
+                desc: '每天晚上开放的繁华夜市，售卖衣服、鞋子、饰品和小吃。',
+                tip: '💡 体验本地人夜生活的好地方，记得讲价。',
+                mapUrl: 'https://maps.google.com/?q=Gerbang+Malam+Ipoh',
+                imgEmoji: '🛍️',
+                connectedPlaces: ['p_louwong', 'p_tongsuikai'],
+                costStatus: '免费', estimatedCost: '丰俭由人', category: '夜市', lastVerified: '2026-05'
+            },
+            {
+                id: 'p_keklok', type: 'nature', area: 'Gunung Rapat', tags: ['石灰岩洞'],
+                timeSlots: ['morning', 'afternoon'],
+                name: '极乐洞', nameEn: 'Kek Lok Tong', duration: '1.5 小时',
+                desc: '穿过宏伟的钟乳石洞穴，背面隐藏着一个世外桃源般的隐秘花园和湖泊。',
+                tip: '💡 洞内凉爽，非常适合躲避下午的高温。',
+                mapUrl: 'https://maps.google.com/?q=Kek+Lok+Tong',
+                imgEmoji: '⛰️',
+                connectedPlaces: ['p_sampoh'],
+                costStatus: '免费 (随缘乐捐)', estimatedCost: '0', category: '自然景观', lastVerified: '2026-05'
+            },
+            {
+                id: 'p_sampoh', type: 'nature', area: 'Gunung Rapat', tags: ['佛教圣地'],
+                timeSlots: ['morning', 'afternoon'],
+                name: '三宝洞', nameEn: 'Sam Poh Tong', duration: '1 小时',
+                desc: '怡保最古老、最著名的石窟寺庙，内有一个独特的放生池。',
+                tip: '💡 寺庙内的建筑与岩壁自然融合。',
+                mapUrl: 'https://maps.google.com/?q=Sam+Poh+Tong+Temple',
+                imgEmoji: '🛕',
+                connectedPlaces: ['p_keklok'],
+                costStatus: '免费 (随缘乐捐)', estimatedCost: '0', category: '宗教场所', lastVerified: '2026-05'
+            }
+        ];
+
+        const routesConfig = {
+            foodie: {
+                title: '🍜 经典吃货半日游', desc: '吃遍旧街场和新街场的招牌美食网络。',
+                steps: [
+                    { time: '08:30 AM', id: 'p_namheong' },
+                    { time: '10:00 AM', id: 'p_concubine' },
+                    { time: '12:30 PM', id: 'p_louwong' },
+                    { time: '14:00 PM', id: 'p_funny_mountain' }
+                ]
+            },
+            culture: {
+                title: '📸 文艺复古打卡线', desc: '穿梭在百年建筑与文创巷弄中，感受旧时光。',
+                steps: [
+                    { time: '09:00 AM', id: 'p_ipoh_station' },
+                    { time: '10:30 AM', id: 'p_market_lane' },
+                    { time: '11:30 AM', id: 'p_mural' }
+                ]
+            }
+        };
+
+        const grid = document.getElementById('placesGrid');
+        const searchInput = document.getElementById('searchInput');
+        const areaFilter = document.getElementById('areaFilter');
+        const timeFilter = document.getElementById('timeFilter');
+        const filterBtns = document.querySelectorAll('.filter-btn');
+        const graphSection = document.getElementById('graphSection');
+        const graphContent = document.getElementById('graphContent');
+        const filtersContainer = document.getElementById('filtersContainer');
+
+        let currentTypeFilter = 'all';
+
+        function getTimeTagsHtml(timeSlots) {
+            let html = '';
+            if(timeSlots.includes('morning')) html += '<span class="time-tag time-morning">🌅 早上</span>';
+            if(timeSlots.includes('afternoon')) html += '<span class="time-tag time-afternoon">☀️ 下午</span>';
+            if(timeSlots.includes('night')) html += '<span class="time-tag time-night">🌙 晚上</span>';
+            return html;
+        }
+
+        function renderCards(data) {
+            grid.innerHTML = '';
+            if(data.length === 0) {
+                grid.innerHTML = '<div style="grid-column: 1/-1; text-align: center; color: var(--text-gray); padding: 2rem;">没有找到匹配的地点。</div>';
+                return;
+            }
+
+            data.forEach(place => {
+                const tagsHtml = place.tags.map(tag => `<span class="tag">${tag}</span>`).join('');
+                const timeHtml = getTimeTagsHtml(place.timeSlots);
+                
+                const bgColors = {
+                    food: 'linear-gradient(135deg, #ff9a9e 0%, #fecfef 100%)',
+                    attraction: 'linear-gradient(135deg, #a18cd1 0%, #fbc2eb 100%)',
+                    nature: 'linear-gradient(135deg, #84fab0 0%, #8fd3f4 100%)'
+                };
+                
+                grid.innerHTML += `
+                    <div class="place-card" onclick="buildGraph('${place.id}')">
+                        <div class="card-img-placeholder" style="background: ${bgColors[place.type]}">
+                            ${place.imgEmoji}
+                        </div>
+                        <div class="card-body">
+                            <div class="card-header">
+                                <div>
+                                    <h3 class="place-title">${place.name}</h3>
+                                    <div class="place-title-en">${place.nameEn}</div>
+                                </div>
+                                <span class="duration-badge">⏱ ${place.duration}</span>
+                            </div>
+                            
+                            <div class="meta-data">
+                                <span class="meta-item">💰 ${place.costStatus} (${place.estimatedCost})</span>
+                                <span class="meta-item">✅ 验证于: ${place.lastVerified}</span>
+                            </div>
+
+                            <div style="margin-bottom: 0.8rem;">${timeHtml}</div>
+                            
+                            <div class="card-tags">
+                                <span class="tag area-tag">📍 ${place.area}</span>
+                                <span class="tag">${place.category}</span>
+                                ${tagsHtml}
+                            </div>
+                            
+                            <p class="place-desc">${place.desc}</p>
+                            
+                            <div class="card-actions">
+                                <button class="btn btn-primary" onclick="event.stopPropagation(); buildGraph('${place.id}')">🔗 进入漫游模式</button>
+                                <a href="${place.mapUrl}" target="_blank" class="btn btn-outline" onclick="event.stopPropagation();">🗺️ 地图</a>
+                            </div>
+                        </div>
+                    </div>
+                `;
+            });
+        }
+
+        function applyFilters() {
+            const term = searchInput.value.toLowerCase();
+            const area = areaFilter.value;
+            const time = timeFilter.value;
+            
+            const filtered = placesDb.filter(p => {
+                const matchType = currentTypeFilter === 'all' || p.type === currentTypeFilter;
+                const matchArea = area === 'all' || p.area === area;
+                const matchTime = time === 'all' || p.timeSlots.includes(time);
+                const matchSearch = p.name.toLowerCase().includes(term) || 
+                                    p.nameEn.toLowerCase().includes(term) || 
+                                    p.desc.toLowerCase().includes(term) ||
+                                    p.category.toLowerCase().includes(term);
+                return matchType && matchArea && matchTime && matchSearch;
+            });
+            renderCards(filtered);
+        }
+
+        searchInput.addEventListener('input', applyFilters);
+        areaFilter.addEventListener('change', applyFilters);
+        timeFilter.addEventListener('change', applyFilters);
+        
+        filterBtns.forEach(btn => {
+            btn.addEventListener('click', (e) => {
+                filterBtns.forEach(b => b.classList.remove('active'));
+                e.target.classList.add('active');
+                currentTypeFilter = e.target.dataset.type;
+                applyFilters();
+            });
+        });
+
+        function closeGraph() {
+            graphSection.style.display = 'none';
+            grid.style.display = 'grid';
+            filtersContainer.style.display = 'flex';
+            document.querySelector('.section-title').style.display = 'block';
+            window.scrollTo({ top: filtersContainer.offsetTop - 20, behavior: 'smooth' });
+        }
+
+        function buildGraph(rootId) {
+            const rootPlace = placesDb.find(p => p.id === rootId);
+            if (!rootPlace) return;
+
+            grid.style.display = 'none';
+            filtersContainer.style.display = 'none';
+            document.querySelector('.section-title').style.display = 'none';
+            graphSection.style.display = 'block';
+            
+            window.scrollTo({ top: graphSection.offsetTop - 50, behavior: 'smooth' });
+
+            const connectedNodesData = rootPlace.connectedPlaces.map(cid => placesDb.find(p => p.id === cid)).filter(Boolean);
+            const typeMap = { food: '美食', attraction: '打卡点', nature: '自然风光' };
+
+            let graphHTML = `
+                <div class="graph-header-controls">
+                    <h2 class="graph-title">🔗 路线漫游模式</h2>
+                    <button class="btn-back" onclick="closeGraph()">← 返回列表</button>
+                </div>
+                <p style="color: var(--text-gray); margin-bottom: 2rem;">当前位置：你可以基于此地点，选择下一站适合前往的地方。</p>
+                
+                <div class="root-node">
+                    <div style="font-size: 3rem; margin-bottom:0.5rem;">${rootPlace.imgEmoji}</div>
+                    <h3>${rootPlace.name}</h3>
+                    <p style="font-size:0.9rem; color: var(--text-gray); margin-bottom: 1rem;">${rootPlace.nameEn}</p>
+                    <div style="margin-bottom: 1rem;">${getTimeTagsHtml(rootPlace.timeSlots)}</div>
+                    <div class="meta-data" style="justify-content: center; margin-bottom: 1rem;">
+                        <span class="meta-item">💰 ${rootPlace.costStatus} (${rootPlace.estimatedCost})</span>
+                        <span class="meta-item">✅ 验证于: ${rootPlace.lastVerified}</span>
+                    </div>
+                    <div>
+                        <span class="tag area-tag">${rootPlace.area}</span>
+                        <span class="tag">${rootPlace.category}</span>
+                        <span style="font-size: 0.8rem; color: var(--text-gray); margin-left:5px;">⏱ 建议逗留 ${rootPlace.duration}</span>
+                    </div>
+                </div>
+            `;
+
+            const branches = { morning: [], afternoon: [], night: [] };
+            
+            connectedNodesData.forEach(node => {
+                node.timeSlots.forEach(time => {
+                    if(branches[time]) branches[time].push(node);
+                });
+            });
+
+            graphHTML += `<div class="time-branches">`;
+            
+            const renderBranchNodes = (nodes) => {
+                if (nodes.length === 0) return `<p style="color: #999; font-size: 0.9rem; text-align: center; margin-top: 1rem;">暂无推荐节点</p>`;
+                return nodes.map(node => `
+                    <div class="connected-node" onclick="buildGraph('${node.id}')">
+                        <div class="c-node-header">
+                            <span class="c-node-title">${node.imgEmoji} ${node.name}</span>
+                        </div>
+                        <div class="c-node-info">${node.category} • ${node.duration}</div>
+                        <p style="font-size: 0.8rem; color: #7f8c8d; line-height: 1.3; margin-bottom: 0.8rem;">${node.desc.substring(0, 40)}...</p>
+                        <div style="display: flex; justify-content: space-between; align-items: center;">
+                            <span style="font-size: 0.75rem; color: var(--primary); font-weight: bold;">点击切换为起点 ↗</span>
+                            <a href="${node.mapUrl}" target="_blank" class="c-node-map" onclick="event.stopPropagation();">🗺️ 地图</a>
+                        </div>
+                    </div>
+                `).join('');
+            };
+
+            if (branches.morning.length > 0) {
+                graphHTML += `
+                    <div class="time-branch morning">
+                        <div class="branch-title"><span style="font-size: 1.5rem;">🌅</span> 如果是早上...</div>
+                        ${renderBranchNodes(branches.morning)}
+                    </div>
+                `;
+            }
+
+            if (branches.afternoon.length > 0) {
+                graphHTML += `
+                    <div class="time-branch afternoon">
+                        <div class="branch-title"><span style="font-size: 1.5rem;">☀️</span> 如果是下午...</div>
+                        ${renderBranchNodes(branches.afternoon)}
+                    </div>
+                `;
+            }
+
+            if (branches.night.length > 0) {
+                graphHTML += `
+                    <div class="time-branch night">
+                        <div class="branch-title"><span style="font-size: 1.5rem;">🌙</span> 如果是晚上...</div>
+                        ${renderBranchNodes(branches.night)}
+                    </div>
+                `;
+            }
+
+            graphHTML += `</div>`;
+            graphContent.innerHTML = graphHTML;
+        }
+
+        function openRoute(routeId) {
+            const route = routesConfig[routeId];
+            if (!route) return;
+            
+            document.getElementById('modalTitle').innerText = route.title;
+            document.getElementById('modalDesc').innerText = route.desc;
+            
+            const timeline = document.getElementById('timelineContent');
+            
+            timeline.innerHTML = route.steps.map(step => {
+                const place = placesDb.find(p => p.id === step.id);
+                if(!place) return '';
+                return `
+                    <div class="timeline-item">
+                        <span class="time-badge">${step.time}</span>
+                        <div class="timeline-title">${place.name} <span style="font-size:0.9rem; font-weight:normal;">${place.imgEmoji}</span></div>
+                        <div class="timeline-desc">${place.desc}</div>
+                        <div style="margin-top:0.5rem;">
+                             <button class="btn btn-outline" style="padding: 0.3rem 0.6rem; font-size:0.8rem; display:inline-block;" onclick="closeModal(); buildGraph('${place.id}')">查看周边图谱</button>
+                        </div>
+                    </div>
+                `;
+            }).join('');
+
+            document.getElementById('routeModal').classList.add('active');
+        }
+
+        function closeModal() {
+            document.getElementById('routeModal').classList.remove('active');
+        }
+
+        window.onclick = function(event) {
+            const modal = document.getElementById('routeModal');
+            if (event.target == modal) closeModal();
+        }
+
+        // 初始化
+        renderCards(placesDb);
+
+    </script>
+</body>
+</html>
