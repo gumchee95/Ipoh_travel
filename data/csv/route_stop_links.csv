@@ -1,0 +1,13 @@
+﻿route_id,stop_id,sequence_no,direction,verification_status,note_en,note_zh
+check_official,bs-medan-kidd,1,unknown,needs_verification,"Sequence is a planning placeholder, not official order.",顺序为规划占位，不是官方排序。
+check_official,bs-railway-station,2,unknown,needs_verification,"Sequence is a planning placeholder, not official order.",顺序为规划占位，不是官方排序。
+check_official,bs-padang-ipoh,3,unknown,needs_verification,"Sequence is a planning placeholder, not official order.",顺序为规划占位，不是官方排序。
+check_official,bs-concubine-lane,4,unknown,needs_verification,"Sequence is a planning placeholder, not official order.",顺序为规划占位，不是官方排序。
+check_official,bs-pasar-besar,5,unknown,needs_verification,"Sequence is a planning placeholder, not official order.",顺序为规划占位，不是官方排序。
+check_official,bs-jalan-theatre,6,unknown,needs_verification,"Sequence is a planning placeholder, not official order.",顺序为规划占位，不是官方排序。
+check_official,bs-ipoh-parade,7,unknown,needs_verification,"Sequence is a planning placeholder, not official order.",顺序为规划占位，不是官方排序。
+check_official,bs-greentown,8,unknown,needs_verification,"Sequence is a planning placeholder, not official order.",顺序为规划占位，不是官方排序。
+check_official,bs-kinta-city,9,unknown,needs_verification,"Sequence is a planning placeholder, not official order.",顺序为规划占位，不是官方排序。
+check_official,bs-new-hollywood,10,unknown,needs_verification,"Sequence is a planning placeholder, not official order.",顺序为规划占位，不是官方排序。
+check_official,bs-gunung-rapat,11,unknown,needs_verification,"Sequence is a planning placeholder, not official order.",顺序为规划占位，不是官方排序。
+check_official,bs-kek-lok-tong,12,unknown,needs_verification,"Sequence is a planning placeholder, not official order.",顺序为规划占位，不是官方排序。

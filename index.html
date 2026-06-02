@@ -1,188 +1,170 @@
-<!doctype html>
+﻿<!doctype html>
 <html lang="en">
   <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta
-      name="description"
-      content="Ipoh Route Card Guide / 怡保顺路游 is a static card-based travel route database for exploring nearby Ipoh places."
-    />
-    <title>Ipoh Route Card Guide / 怡保顺路游</title>
-    <link rel="stylesheet" href="style.css" />
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Ipoh Travel Route Explorer / 怡保旅游路线资料库</title>
+    <meta name="description" content="A civic, bilingual, CSV-first Ipoh route explorer with map, nearby places, bus stop references, and manual route cards.">
+    <link rel="preconnect" href="https://unpkg.com">
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" crossorigin="">
+    <link rel="stylesheet" href="css/style.css">
   </head>
   <body>
     <header class="hero">
-      <nav class="topbar" aria-label="Main navigation">
-        <a class="brand" href="#top" aria-label="Ipoh Route Card Guide home">
+      <nav class="topbar" aria-label="Site navigation">
+        <a class="brand" href="index.html">
           <span class="brand-mark">怡</span>
           <span>
-            <strong>Ipoh Route Card Guide</strong>
-            <small>怡保顺路游</small>
+            <strong data-i18n="siteTitle">Ipoh Travel Route Explorer</strong>
+            <small data-i18n="siteSubtitle">怡保旅游路线资料库</small>
           </span>
         </a>
-        <div class="nav-links">
-          <a href="#routes">Routes</a>
-          <a href="#places">Places</a>
-          <a href="#graph">Graph</a>
+        <div class="nav-actions">
+          <a href="contribute.html" data-i18n="contribute">Contribute</a>
+          <button class="ghost-button" id="languageToggle" type="button">中文</button>
         </div>
       </nav>
 
-      <section id="top" class="hero-grid">
-        <div class="hero-copy">
-          <p class="eyebrow">No blog. No wiki. Just route logic.</p>
-          <h1>Pick one Ipoh card. See what is nearby, why it fits, and how to go.</h1>
-          <p class="hero-text">
-            A lightweight route database for coffee stops, heritage lanes, cave temples, food crawls,
-            and night walks around Ipoh.
-          </p>
+      <section class="hero-grid">
+        <div>
+          <p class="eyebrow" data-i18n="eyebrow">CSV-first civic route database</p>
+          <h1 data-i18n="heroTitle">Understand Ipoh by following connected places.</h1>
+          <p class="hero-copy" data-i18n="heroCopy">Pick a place, then see the next realistic stops by distance, time, type, and route logic. Map failure never breaks the cards.</p>
           <div class="hero-actions">
-            <a class="button button-primary" href="#places">Explore cards</a>
-            <a class="button button-ghost" href="#routes">Use preset route</a>
+            <a class="primary-button" href="#explorer" data-i18n="startExploring">Start exploring</a>
+            <a class="secondary-button" href="#data-note" data-i18n="dataMethod">How data works</a>
           </div>
         </div>
-
-        <aside class="hero-ticket" aria-label="Sample Ipoh route ticket">
-          <div class="ticket-stamp">顺路</div>
-          <p>Start Node</p>
-          <h2 id="heroActiveName">Ipoh Railway Station</h2>
-          <div class="mini-map" aria-hidden="true">
-            <span>🚉</span>
-            <i></i>
-            <span>☕</span>
-            <i></i>
-            <span>🏮</span>
-          </div>
-          <small>Pick any place card below to instantly redraw nearby recommendations.</small>
+        <aside class="hero-card" aria-label="Route preview">
+          <span class="route-chip" data-i18n="sampleRoute">Sample point-to-point route</span>
+          <ol class="mini-route">
+            <li>Ipoh Railway Station</li>
+            <li>Padang Ipoh</li>
+            <li>Concubine Lane</li>
+            <li>Kong Heng Square</li>
+          </ol>
         </aside>
       </section>
     </header>
 
     <main>
-      <section class="section about" id="about">
-        <div>
-          <p class="eyebrow">About this guide</p>
-          <h2>Designed for “what should I do next?” moments.</h2>
-        </div>
-        <p>
-          Each place stores practical route metadata: nearby recommendations, distance notes,
-          transport mode, cost, timing, parking, weather notes, and a Google Maps link. The site
-          runs fully static and can optionally load public Google Sheet CSV data.
-        </p>
-      </section>
-
-      <section class="section" id="routes">
+      <section class="about section-pad" id="data-note">
         <div class="section-heading">
-          <div>
-            <p class="eyebrow">Preset itineraries</p>
-            <h2>Route cards for common Ipoh moods</h2>
-          </div>
-          <p class="muted">Open a preset to inspect its stops, then jump into the graph.</p>
+          <p class="eyebrow" data-i18n="aboutEyebrow">Not official. Not ranking-for-sale.</p>
+          <h2 data-i18n="aboutTitle">A lightweight public travel map for Ipoh.</h2>
         </div>
-        <div class="preset-grid" id="presetRoutes" aria-live="polite"></div>
+        <div class="about-grid">
+          <article>
+            <h3 data-i18n="csvFirst">CSV first</h3>
+            <p data-i18n="csvFirstCopy">Places, bus stops, routes and sponsors load from CSV files first. JSON remains a fallback.</p>
+          </article>
+          <article>
+            <h3 data-i18n="routeLogic">Route logic</h3>
+            <p data-i18n="routeLogicCopy">Recommendations use distance, manual route links, time slot, category and tags. Sponsors never change scores.</p>
+          </article>
+          <article>
+            <h3 data-i18n="busCare">Bus references</h3>
+            <p data-i18n="busCareCopy">BAS.MY / Pink Bus references are clearly marked as inferred or needing verification unless officially checked.</p>
+          </article>
+        </div>
       </section>
 
-      <section class="section controls-section" aria-labelledby="filters-title">
+      <section class="section-pad explorer" id="explorer">
         <div class="section-heading compact">
-          <div>
-            <p class="eyebrow">Find a node</p>
-            <h2 id="filters-title">Search and filter route cards</h2>
-          </div>
-          <div class="data-pill" id="dataStatus">Loading guide data...</div>
+          <p class="eyebrow" id="dataStatus">Loading static data...</p>
+          <h2 data-i18n="explorerTitle">Choose a place to build a route.</h2>
+          <p class="map-instruction" data-i18n="explorerHint">Tip: click any place icon on the map to switch the route focus.</p>
         </div>
 
-        <div class="controls">
-          <label class="search-box">
-            <span>Search</span>
-            <input id="searchInput" type="search" placeholder="Try coffee, night, cave, mural..." />
-          </label>
-
+        <div class="control-panel" aria-label="Filters">
           <label>
-            <span>Area</span>
-            <select id="areaFilter">
-              <option value="all">All areas</option>
-            </select>
+            <span data-i18n="search">Search</span>
+            <input id="searchInput" type="search" placeholder="Railway, coffee, temple...">
           </label>
-
           <label>
-            <span>Time</span>
+            <span data-i18n="area">Area</span>
+            <select id="areaFilter"></select>
+          </label>
+          <label>
+            <span data-i18n="time">Time</span>
             <select id="timeFilter">
-              <option value="all">Any time</option>
+              <option value="all" data-i18n="allTimes">All times</option>
+              <option value="morning">Morning</option>
+              <option value="noon">Noon</option>
+              <option value="afternoon">Afternoon</option>
+              <option value="evening">Evening</option>
+              <option value="night">Night</option>
             </select>
           </label>
-
           <label>
-            <span>Cost</span>
-            <select id="costFilter">
-              <option value="all">Any cost</option>
-            </select>
+            <span data-i18n="type">Type</span>
+            <select id="categoryFilter"></select>
           </label>
-
           <label>
-            <span>Type</span>
-            <select id="typeFilter">
-              <option value="all">Any type</option>
+            <span data-i18n="cost">Cost</span>
+            <select id="priceFilter">
+              <option value="all" data-i18n="allCosts">All costs</option>
+              <option value="$">$</option>
+              <option value="$$">$$</option>
+              <option value="$$$">$$$</option>
             </select>
           </label>
-
-          <button class="button button-reset" id="resetFilters" type="button">Reset</button>
         </div>
-        <div class="active-filters" id="activeFilters" aria-live="polite"></div>
-      </section>
 
-      <section class="section split-layout" id="places">
-        <div id="placesListPanel">
-          <div class="section-heading compact">
-            <div>
-              <p class="eyebrow">Place cards</p>
-              <h2>Choose your route anchor</h2>
+        <div class="layout-grid">
+          <aside class="place-panel">
+            <div class="panel-title">
+              <h3 data-i18n="places">Places</h3>
+              <span id="resultCount">0</span>
             </div>
-            <p class="result-count" id="resultCount">0 places</p>
-          </div>
-          <div class="cards-grid" id="placesGrid" aria-live="polite"></div>
-          <div class="empty-state" id="emptyState" hidden>
-            <strong>No matching places.</strong>
-            <span>Try clearing one filter or searching a broader term.</span>
-          </div>
-        </div>
+            <div id="placeList" class="place-list"></div>
+          </aside>
 
-        <section class="route-panel" id="graph" aria-live="polite" hidden>
-          <div class="route-panel-head">
-            <p class="eyebrow">Route flow</p>
-            <h2 id="activePlaceTitle">Select a place</h2>
-            <p id="activePlaceDesc">Click any connected point to see why it is next, then continue from that place.</p>
-          </div>
-          <button class="button button-reset" id="backToList" type="button">Back to place cards</button>
-          <div class="active-meta" id="activeMeta"></div>
-          <div class="route-panel-actions">
-            <a class="button button-ghost" id="activeMapLink" href="#" target="_blank" rel="noopener noreferrer">Open active place map</a>
-          </div>
-          <div class="node-graph" id="nodeGraph"></div>
-        </section>
+          <section class="route-panel">
+            <div id="mapStatus" class="map-status" hidden></div>
+            <div class="map-wrap">
+              <div id="map" class="map-shell" aria-label="Ipoh map"></div>
+              <div class="map-legend" aria-label="Map legend">
+                <span><i class="legend-icon legend-selected">&#8982;</i> <b data-i18n="legendSelected">Selected</b></span>
+                <span><i class="legend-icon legend-nearby">&#10022;</i> <b data-i18n="legendNearby">Nearby place</b></span>
+                <span><i class="legend-icon legend-bus">&#128652;</i> <b data-i18n="legendBus">Bus reference</b></span>
+              </div>
+            </div>
+
+            <div class="selected-card" id="selectedCard"></div>
+
+            <div class="nearby-row">
+              <div class="graph-card">
+                <div class="panel-title">
+                  <h3 data-i18n="routeGraph">Route graph</h3>
+                  <span data-i18n="pointToPoint">Point to point</span>
+                </div>
+                <div id="routeGraph" class="route-graph"></div>
+              </div>
+
+              <div class="nearby-card">
+                <div class="panel-title">
+                  <h3 data-i18n="busStops">Nearby bus references</h3>
+                  <span>BAS.MY / Pink Bus</span>
+                </div>
+                <div id="busStops" class="bus-list"></div>
+              </div>
+            </div>
+          </section>
+        </div>
       </section>
     </main>
 
     <footer class="footer">
-      <strong>Ipoh Route Card Guide / 怡保顺路游</strong>
-      <p>
-        Disclaimer: Route notes, costs, opening context, and distances are planning estimates only.
-        Check current conditions, business hours, weather, and transport availability before travel.
-        Google Maps links open externally and do not use a Maps API.
-      </p>
+      <p data-i18n="footerDisclaimer">Community guide only. Verify opening hours, fares, routes, safety and official transport information before travelling.</p>
+      <p><a href="docs/deployment.md" data-i18n="deploymentDocs">Deployment docs</a> / <a href="docs/contribution_guide.md" data-i18n="contributionDocs">Contribution guide</a></p>
     </footer>
 
-    <div class="modal" id="routeModal" hidden>
-      <div class="modal-backdrop" data-close-modal></div>
-      <section class="modal-card" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
-        <button class="modal-close" type="button" data-close-modal aria-label="Close route modal">×</button>
-        <p class="eyebrow">Preset route</p>
-        <h2 id="modalTitle"></h2>
-        <p id="modalSummary"></p>
-        <div class="modal-tags" id="modalTags"></div>
-        <ol class="modal-stops" id="modalStops"></ol>
-      </section>
-    </div>
-
-    <script src="places.js"></script>
-    <script src="script.js"></script>
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" crossorigin=""></script>
+    <script src="js/i18n.js"></script>
+    <script src="js/csvLoader.js"></script>
+    <script src="js/recommendation.js"></script>
+    <script src="js/map.js"></script>
+    <script src="js/app.js"></script>
   </body>
 </html>

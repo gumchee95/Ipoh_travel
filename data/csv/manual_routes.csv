@@ -1,0 +1,13 @@
+﻿route_id,title_en,title_zh,from_id,to_id,transport_mode,distance_note_en,distance_note_zh,time_slot,priority,reason_en,reason_zh
+old-town-walk-01,Railway to Padang,火车站到草场,ipoh-railway-station,padang-ipoh,walk,Short Old Town walk,旧街场短步行,morning|afternoon,10,"Start with the station, then orient at the field.",先从火车站开始，再到草场定位。
+old-town-walk-02,Padang to Concubine Lane,草场到二奶巷,padang-ipoh,concubine-lane,walk,Easy heritage walk,轻松古迹步行,morning|afternoon,10,Moves from civic landmarks into the lane cluster.,从市政古迹进入小巷群。
+old-town-walk-03,Concubine Lane to Kong Heng,二奶巷到光兴,concubine-lane,kong-heng-square,walk,Very close,非常靠近,morning|afternoon|evening,9,"Food, shops and heritage atmosphere connect directly.",美食、小店与旧建筑气氛直接连接。
+old-town-food-01,Kong Heng to Thean Chun,光兴到天津,kong-heng-square,thean-chun,walk,Same cluster,同一区域,morning|noon|afternoon,9,Classic kopitiam stop beside the heritage cluster.,历史街区旁的经典茶室停靠点。
+new-town-food-01,Nam Heong to Funny Mountain,南香到奇峰,nam-heong-white-coffee,funny-mountain,walk,Short New Town walk,新街场短步行,noon|afternoon,8,Coffee and soya beancurd pair well as light snacks.,白咖啡和豆腐花适合轻食连接。
+new-town-food-02,Funny Mountain to Lou Wong,奇峰到老黄,funny-mountain,lou-wong,walk,Very close,非常靠近,evening|night,9,Dessert and bean sprout chicken are close together.,豆腐花与芽菜鸡距离很近。
+night-loop-01,Lou Wong to Gerbang Malam,老黄到夜市街,lou-wong,gerbang-malam,walk,Nearby night route,附近夜间路线,night,8,"After dinner, continue to casual night shopping.",晚餐后接轻松夜市购物。
+river-night-01,Tong Sui Kai to Kinta Riverfront,糖水街到近打河畔,tong-sui-kai,kinta-riverfront,ride_hailing,Short ride recommended,建议短程电召车,night,7,End a food-heavy night with a calmer river walk.,美食夜后用河畔散步收尾。
+temple-route-01,Sam Poh Tong to Ling Sen Tong,三宝洞到灵仙岩,sam-poh-tong,ling-sen-tong,walk,Nearby temple cluster,附近洞庙群,morning|afternoon,9,These temples sit in the same limestone cluster.,这些洞庙位于同一石灰岩区域。
+temple-route-02,Ling Sen Tong to Nam Thean Tong,灵仙岩到南天洞,ling-sen-tong,nam-thean-tong,walk,Nearby temple cluster,附近洞庙群,morning|afternoon,9,A simple point-to-point cave temple continuation.,简单的点到点洞庙延伸。
+temple-route-03,Kek Lok Tong to Tasik Cermin,极乐洞到镜湖,kek-lok-tong,tasik-cermin,ride_hailing,Short ride recommended,建议短程电召车,morning|afternoon,8,Both are strong limestone scenery nodes.,两者都是石灰岩景观强节点。
+tambun-route-01,Kinta City to Lost World,近打城到迷失乐园,aeon-kinta-city,lost-world-tambun,ride_hailing,Ride across Tambun side,电召车前往打扪方向,afternoon|evening,6,Indoor mall stop can precede a Tambun family route.,商场可接打扪亲子路线。

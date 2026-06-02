@@ -1,0 +1,89 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Contribute / 贡献资料 - Ipoh Travel Route Explorer</title>
+    <meta name="description" content="Prepare a manual-review contribution draft for the Ipoh Travel Route Explorer.">
+    <link rel="stylesheet" href="css/style.css">
+  </head>
+  <body>
+    <header class="hero contribute-hero">
+      <nav class="topbar" aria-label="Site navigation">
+        <a class="brand" href="index.html">
+          <span class="brand-mark">怡</span>
+          <span>
+            <strong data-i18n="siteTitle">Ipoh Travel Route Explorer</strong>
+            <small data-i18n="siteSubtitle">怡保旅游路线资料库</small>
+          </span>
+        </a>
+        <div class="nav-actions">
+          <a href="index.html">Explorer</a>
+          <button class="ghost-button" id="languageToggle" type="button">中文</button>
+        </div>
+      </nav>
+    </header>
+
+    <main class="section-pad">
+      <div class="section-heading">
+        <p class="eyebrow" data-i18n="submitTitle">Contribute a place or correction</p>
+        <h1 data-i18n="submitCopy">This static site cannot write directly to the database. Your draft is prepared for manual review.</h1>
+      </div>
+
+      <section class="contribute-card">
+        <form id="contributionForm" class="contribution-form">
+          <label>
+            Place name / 地点名称
+            <input name="name" required placeholder="Example: Ipoh Railway Station">
+          </label>
+          <label>
+            Area / 区域
+            <input name="area" placeholder="Old Town">
+          </label>
+          <label>
+            Category / 类型
+            <select name="category">
+              <option value="food">food</option>
+              <option value="cafe">cafe</option>
+              <option value="heritage">heritage</option>
+              <option value="temple">temple</option>
+              <option value="nature">nature</option>
+              <option value="transport">transport</option>
+              <option value="shopping">shopping</option>
+            </select>
+          </label>
+          <label>
+            Suggested map link / 地图链接
+            <input name="map_url" placeholder="https://maps.google.com/?q=...">
+          </label>
+          <label>
+            Why should travellers visit? / 推荐原因
+            <textarea name="why" rows="4" required placeholder="Short, practical reason."></textarea>
+          </label>
+          <label>
+            Verification note / 核实备注
+            <textarea name="verification" rows="3" placeholder="How did you verify this?"></textarea>
+          </label>
+          <div class="form-actions">
+            <button class="primary-button" type="submit">Prepare draft</button>
+            <button class="secondary-button" id="clearDraft" type="button" data-i18n="clear">Clear</button>
+          </div>
+        </form>
+
+        <aside class="draft-panel">
+          <h2 data-i18n="draftReady">Draft ready for manual review.</h2>
+          <p data-i18n="sponsorRule">Sponsor data is disclosure-only and does not affect ranking.</p>
+          <textarea id="draftOutput" rows="14" readonly></textarea>
+          <button class="ghost-button" id="copyDraft" type="button" data-i18n="copyDraft">Copy draft</button>
+        </aside>
+      </section>
+    </main>
+
+    <footer class="footer">
+      <p data-i18n="footerDisclaimer">Community guide only. Verify opening hours, fares, routes, safety and official transport information before travelling.</p>
+    </footer>
+
+    <script src="js/i18n.js"></script>
+    <script src="js/contribute.js"></script>
+  </body>
+</html>

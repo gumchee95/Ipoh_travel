@@ -1,0 +1,44 @@
+[
+  {
+    "key": "site_name_en",
+    "value": "Ipoh Travel Route Explorer",
+    "note_en": "English site name",
+    "note_zh": "英文站名"
+  },
+  {
+    "key": "site_name_zh",
+    "value": "怡保旅游路线资料库",
+    "note_en": "Chinese site name",
+    "note_zh": "中文站名"
+  },
+  {
+    "key": "default_lat",
+    "value": "4.5970",
+    "note_en": "Map center latitude",
+    "note_zh": "地图中心纬度"
+  },
+  {
+    "key": "default_lng",
+    "value": "101.0750",
+    "note_en": "Map center longitude",
+    "note_zh": "地图中心经度"
+  },
+  {
+    "key": "default_zoom",
+    "value": "13",
+    "note_en": "Map zoom",
+    "note_zh": "地图缩放"
+  },
+  {
+    "key": "data_mode",
+    "value": "csv_first_static",
+    "note_en": "CSV is canonical; JSON is generated.",
+    "note_zh": "CSV 为主资料；JSON 自动生成。"
+  },
+  {
+    "key": "ranking_disclaimer",
+    "value": "Sponsors never affect route recommendation scores.",
+    "note_en": "Public ranking rule.",
+    "note_zh": "赞助不会影响路线推荐排序。"
+  }
+]

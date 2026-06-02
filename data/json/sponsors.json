@@ -1,0 +1,15 @@
+[
+  {
+    "sponsor_id": "sample-community",
+    "name_en": "Community Contributor",
+    "name_zh": "社区贡献者",
+    "type": "community",
+    "area": "Ipoh",
+    "url": "",
+    "active": false,
+    "disclosure_en": "Sponsors never affect ranking.",
+    "disclosure_zh": "赞助不会影响排序。",
+    "note_en": "Placeholder only.",
+    "note_zh": "仅为占位。"
+  }
+]

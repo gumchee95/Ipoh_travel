@@ -1,0 +1,4 @@
+﻿route_id,route_name,operator,coverage_area,status,source_url,source_pdf,verification_status,last_checked,note_en,note_zh
+check_official,Check official BAS.MY route,BAS.MY,Ipoh,unknown,,data/pdf/map-basmyipoh.pdf,needs_verification,2026-06-02,Placeholder route for unverified PDF-based references.,未核实 PDF 参考用占位路线。
+A30A,A30A Ipoh reference,BAS.MY,Ipoh,unknown,,data/pdf/map-basmyipoh.pdf,needs_verification,2026-06-02,Route name should be checked against official source.,路线编号需向官方来源确认。
+A31A,A31A Ipoh reference,BAS.MY,Ipoh,unknown,,data/pdf/map-basmyipoh.pdf,needs_verification,2026-06-02,Route name should be checked against official source.,路线编号需向官方来源确认。

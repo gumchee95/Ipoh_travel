@@ -1,0 +1,41 @@
+[
+  {
+    "route_id": "check_official",
+    "route_name": "Check official BAS.MY route",
+    "operator": "BAS.MY",
+    "coverage_area": "Ipoh",
+    "status": "unknown",
+    "source_url": "",
+    "source_pdf": "data/pdf/map-basmyipoh.pdf",
+    "verification_status": "needs_verification",
+    "last_checked": "2026-06-02",
+    "note_en": "Placeholder route for unverified PDF-based references.",
+    "note_zh": "未核实 PDF 参考用占位路线。"
+  },
+  {
+    "route_id": "A30A",
+    "route_name": "A30A Ipoh reference",
+    "operator": "BAS.MY",
+    "coverage_area": "Ipoh",
+    "status": "unknown",
+    "source_url": "",
+    "source_pdf": "data/pdf/map-basmyipoh.pdf",
+    "verification_status": "needs_verification",
+    "last_checked": "2026-06-02",
+    "note_en": "Route name should be checked against official source.",
+    "note_zh": "路线编号需向官方来源确认。"
+  },
+  {
+    "route_id": "A31A",
+    "route_name": "A31A Ipoh reference",
+    "operator": "BAS.MY",
+    "coverage_area": "Ipoh",
+    "status": "unknown",
+    "source_url": "",
+    "source_pdf": "data/pdf/map-basmyipoh.pdf",
+    "verification_status": "needs_verification",
+    "last_checked": "2026-06-02",
+    "note_en": "Route name should be checked against official source.",
+    "note_zh": "路线编号需向官方来源确认。"
+  }
+]

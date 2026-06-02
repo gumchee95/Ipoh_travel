@@ -1,0 +1,8 @@
+﻿key,value,note_en,note_zh
+site_name_en,Ipoh Travel Route Explorer,English site name,英文站名
+site_name_zh,怡保旅游路线资料库,Chinese site name,中文站名
+default_lat,4.5970,Map center latitude,地图中心纬度
+default_lng,101.0750,Map center longitude,地图中心经度
+default_zoom,13,Map zoom,地图缩放
+data_mode,csv_first_static,CSV is canonical; JSON is generated.,CSV 为主资料；JSON 自动生成。
+ranking_disclaimer,Sponsors never affect route recommendation scores.,Public ranking rule.,赞助不会影响路线推荐排序。

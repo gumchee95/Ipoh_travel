@@ -1,0 +1,206 @@
+[
+  {
+    "route_id": "old-town-walk-01",
+    "title_en": "Railway to Padang",
+    "title_zh": "火车站到草场",
+    "from_id": "ipoh-railway-station",
+    "to_id": "padang-ipoh",
+    "transport_mode": "walk",
+    "distance_note_en": "Short Old Town walk",
+    "distance_note_zh": "旧街场短步行",
+    "time_slot": [
+      "morning",
+      "afternoon"
+    ],
+    "priority": 10,
+    "reason_en": "Start with the station, then orient at the field.",
+    "reason_zh": "先从火车站开始，再到草场定位。"
+  },
+  {
+    "route_id": "old-town-walk-02",
+    "title_en": "Padang to Concubine Lane",
+    "title_zh": "草场到二奶巷",
+    "from_id": "padang-ipoh",
+    "to_id": "concubine-lane",
+    "transport_mode": "walk",
+    "distance_note_en": "Easy heritage walk",
+    "distance_note_zh": "轻松古迹步行",
+    "time_slot": [
+      "morning",
+      "afternoon"
+    ],
+    "priority": 10,
+    "reason_en": "Moves from civic landmarks into the lane cluster.",
+    "reason_zh": "从市政古迹进入小巷群。"
+  },
+  {
+    "route_id": "old-town-walk-03",
+    "title_en": "Concubine Lane to Kong Heng",
+    "title_zh": "二奶巷到光兴",
+    "from_id": "concubine-lane",
+    "to_id": "kong-heng-square",
+    "transport_mode": "walk",
+    "distance_note_en": "Very close",
+    "distance_note_zh": "非常靠近",
+    "time_slot": [
+      "morning",
+      "afternoon",
+      "evening"
+    ],
+    "priority": 9,
+    "reason_en": "Food, shops and heritage atmosphere connect directly.",
+    "reason_zh": "美食、小店与旧建筑气氛直接连接。"
+  },
+  {
+    "route_id": "old-town-food-01",
+    "title_en": "Kong Heng to Thean Chun",
+    "title_zh": "光兴到天津",
+    "from_id": "kong-heng-square",
+    "to_id": "thean-chun",
+    "transport_mode": "walk",
+    "distance_note_en": "Same cluster",
+    "distance_note_zh": "同一区域",
+    "time_slot": [
+      "morning",
+      "noon",
+      "afternoon"
+    ],
+    "priority": 9,
+    "reason_en": "Classic kopitiam stop beside the heritage cluster.",
+    "reason_zh": "历史街区旁的经典茶室停靠点。"
+  },
+  {
+    "route_id": "new-town-food-01",
+    "title_en": "Nam Heong to Funny Mountain",
+    "title_zh": "南香到奇峰",
+    "from_id": "nam-heong-white-coffee",
+    "to_id": "funny-mountain",
+    "transport_mode": "walk",
+    "distance_note_en": "Short New Town walk",
+    "distance_note_zh": "新街场短步行",
+    "time_slot": [
+      "noon",
+      "afternoon"
+    ],
+    "priority": 8,
+    "reason_en": "Coffee and soya beancurd pair well as light snacks.",
+    "reason_zh": "白咖啡和豆腐花适合轻食连接。"
+  },
+  {
+    "route_id": "new-town-food-02",
+    "title_en": "Funny Mountain to Lou Wong",
+    "title_zh": "奇峰到老黄",
+    "from_id": "funny-mountain",
+    "to_id": "lou-wong",
+    "transport_mode": "walk",
+    "distance_note_en": "Very close",
+    "distance_note_zh": "非常靠近",
+    "time_slot": [
+      "evening",
+      "night"
+    ],
+    "priority": 9,
+    "reason_en": "Dessert and bean sprout chicken are close together.",
+    "reason_zh": "豆腐花与芽菜鸡距离很近。"
+  },
+  {
+    "route_id": "night-loop-01",
+    "title_en": "Lou Wong to Gerbang Malam",
+    "title_zh": "老黄到夜市街",
+    "from_id": "lou-wong",
+    "to_id": "gerbang-malam",
+    "transport_mode": "walk",
+    "distance_note_en": "Nearby night route",
+    "distance_note_zh": "附近夜间路线",
+    "time_slot": [
+      "night"
+    ],
+    "priority": 8,
+    "reason_en": "After dinner, continue to casual night shopping.",
+    "reason_zh": "晚餐后接轻松夜市购物。"
+  },
+  {
+    "route_id": "river-night-01",
+    "title_en": "Tong Sui Kai to Kinta Riverfront",
+    "title_zh": "糖水街到近打河畔",
+    "from_id": "tong-sui-kai",
+    "to_id": "kinta-riverfront",
+    "transport_mode": "ride_hailing",
+    "distance_note_en": "Short ride recommended",
+    "distance_note_zh": "建议短程电召车",
+    "time_slot": [
+      "night"
+    ],
+    "priority": 7,
+    "reason_en": "End a food-heavy night with a calmer river walk.",
+    "reason_zh": "美食夜后用河畔散步收尾。"
+  },
+  {
+    "route_id": "temple-route-01",
+    "title_en": "Sam Poh Tong to Ling Sen Tong",
+    "title_zh": "三宝洞到灵仙岩",
+    "from_id": "sam-poh-tong",
+    "to_id": "ling-sen-tong",
+    "transport_mode": "walk",
+    "distance_note_en": "Nearby temple cluster",
+    "distance_note_zh": "附近洞庙群",
+    "time_slot": [
+      "morning",
+      "afternoon"
+    ],
+    "priority": 9,
+    "reason_en": "These temples sit in the same limestone cluster.",
+    "reason_zh": "这些洞庙位于同一石灰岩区域。"
+  },
+  {
+    "route_id": "temple-route-02",
+    "title_en": "Ling Sen Tong to Nam Thean Tong",
+    "title_zh": "灵仙岩到南天洞",
+    "from_id": "ling-sen-tong",
+    "to_id": "nam-thean-tong",
+    "transport_mode": "walk",
+    "distance_note_en": "Nearby temple cluster",
+    "distance_note_zh": "附近洞庙群",
+    "time_slot": [
+      "morning",
+      "afternoon"
+    ],
+    "priority": 9,
+    "reason_en": "A simple point-to-point cave temple continuation.",
+    "reason_zh": "简单的点到点洞庙延伸。"
+  },
+  {
+    "route_id": "temple-route-03",
+    "title_en": "Kek Lok Tong to Tasik Cermin",
+    "title_zh": "极乐洞到镜湖",
+    "from_id": "kek-lok-tong",
+    "to_id": "tasik-cermin",
+    "transport_mode": "ride_hailing",
+    "distance_note_en": "Short ride recommended",
+    "distance_note_zh": "建议短程电召车",
+    "time_slot": [
+      "morning",
+      "afternoon"
+    ],
+    "priority": 8,
+    "reason_en": "Both are strong limestone scenery nodes.",
+    "reason_zh": "两者都是石灰岩景观强节点。"
+  },
+  {
+    "route_id": "tambun-route-01",
+    "title_en": "Kinta City to Lost World",
+    "title_zh": "近打城到迷失乐园",
+    "from_id": "aeon-kinta-city",
+    "to_id": "lost-world-tambun",
+    "transport_mode": "ride_hailing",
+    "distance_note_en": "Ride across Tambun side",
+    "distance_note_zh": "电召车前往打扪方向",
+    "time_slot": [
+      "afternoon",
+      "evening"
+    ],
+    "priority": 6,
+    "reason_en": "Indoor mall stop can precede a Tambun family route.",
+    "reason_zh": "商场可接打扪亲子路线。"
+  }
+]

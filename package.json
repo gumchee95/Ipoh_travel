@@ -1,0 +1,12 @@
+{
+  "name": "ipoh-travel-route-explorer",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Community-based Ipoh travel route explorer with CSV-first data.",
+  "scripts": {
+    "build:data": "node scripts/build-data.js",
+    "validate:data": "node scripts/validate-data.js",
+    "analyze:basmy": "node scripts/analyze-basmy-pdf.js",
+    "prepare": "npm run validate:data && npm run build:data"
+  }
+}
