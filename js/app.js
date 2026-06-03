@@ -50,6 +50,7 @@
       "selectedCard",
       "routeGraph",
       "busStops",
+      "routeSummary",
       "dataStatus",
       "mapStatus"
     ].forEach((id) => {
@@ -102,6 +103,7 @@
 
     els.resultCount.textContent = places.length;
     renderPlaces(places);
+    renderRouteSummary(selected, recommendations, stops, mapPlaces);
     renderSelected(selected);
     renderGraph(selected, recommendations);
     renderBusStops(stops);
@@ -175,6 +177,26 @@
         <div><dt>${IpohI18n.t("verification")}</dt><dd>${escapeHtml(place.verification_status || "-")}</dd></div>
       </dl>
       <a class="text-link" href="${escapeAttr(place.map_url)}" target="_blank" rel="noopener">${IpohI18n.t("viewMap")}</a>
+    `;
+  }
+
+  function renderRouteSummary(selected, recommendations, stops, mapPlaces) {
+    if (!selected) {
+      els.routeSummary.innerHTML = "";
+      return;
+    }
+    const visiblePlaceCount = new Set([selected.id, ...(mapPlaces || []).map((place) => place.id)]).size;
+    els.routeSummary.innerHTML = `
+      <div>
+        <span class="summary-label">${IpohI18n.t("currentFocus")}</span>
+        <strong>${displayName(selected)}</strong>
+      </div>
+      <div class="summary-metrics">
+        <span><b>${recommendations.length}</b> ${IpohI18n.t("nextStops")}</span>
+        <span><b>${stops.length}</b> ${IpohI18n.t("busRefs")}</span>
+        <span><b>${visiblePlaceCount}</b> ${IpohI18n.t("mapPlaces")}</span>
+      </div>
+      <p>${IpohI18n.t("sortedDistance")} ${IpohI18n.t("clickSwitch")}</p>
     `;
   }
 

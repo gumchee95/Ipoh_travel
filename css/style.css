@@ -1208,3 +1208,101 @@ h3 {
     max-height: none;
   }
 }
+
+/* UI Suite UX pass: clearer route context and safer focus states. */
+.route-panel {
+  grid-template-areas:
+    "summary summary"
+    "map detail"
+    "nearby nearby";
+}
+
+.route-summary {
+  align-items: center;
+  background: rgba(255, 255, 255, 0.9);
+  border: 1px solid var(--line);
+  border-radius: 20px;
+  box-shadow: var(--shadow-soft);
+  display: grid;
+  gap: 10px 18px;
+  grid-area: summary;
+  grid-template-columns: minmax(0, 1fr) auto;
+  padding: 14px 16px;
+}
+
+.route-summary strong {
+  display: block;
+  font-size: clamp(1rem, 1.3vw, 1.2rem);
+  line-height: 1.25;
+}
+
+.route-summary p {
+  color: var(--muted);
+  grid-column: 1 / -1;
+  margin: 0;
+}
+
+.summary-label {
+  color: var(--accent);
+  display: block;
+  font-size: 0.7rem;
+  font-weight: 900;
+  letter-spacing: 0.08em;
+  margin-bottom: 3px;
+  text-transform: uppercase;
+}
+
+.summary-metrics {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  justify-content: flex-end;
+}
+
+.summary-metrics span {
+  background: var(--surface-soft);
+  border: 1px solid rgba(217, 226, 218, 0.85);
+  border-radius: 14px;
+  color: var(--muted);
+  font-size: 0.82rem;
+  font-weight: 800;
+  padding: 8px 10px;
+  white-space: nowrap;
+}
+
+.summary-metrics b {
+  color: var(--ink);
+}
+
+.map-status {
+  grid-column: 1 / -1;
+}
+
+.map-shell:focus-visible,
+.place-card:focus-visible,
+.graph-node button:focus-visible,
+.primary-button:focus-visible,
+.secondary-button:focus-visible,
+.ghost-button:focus-visible,
+.nav-actions a:focus-visible {
+  outline: 3px solid rgba(240, 111, 60, 0.45);
+  outline-offset: 3px;
+}
+
+@media (max-width: 1120px) {
+  .route-panel {
+    grid-template-areas:
+      "summary"
+      "map"
+      "detail"
+      "nearby";
+  }
+
+  .route-summary {
+    grid-template-columns: 1fr;
+  }
+
+  .summary-metrics {
+    justify-content: flex-start;
+  }
+}

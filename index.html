@@ -79,15 +79,15 @@
         <div class="control-panel" aria-label="Filters">
           <label>
             <span data-i18n="search">Search</span>
-            <input id="searchInput" type="search" placeholder="Railway, coffee, temple...">
+            <input id="searchInput" type="search" placeholder="Railway, coffee, temple..." aria-label="Search places">
           </label>
           <label>
             <span data-i18n="area">Area</span>
-            <select id="areaFilter"></select>
+            <select id="areaFilter" aria-label="Filter by area"></select>
           </label>
           <label>
             <span data-i18n="time">Time</span>
-            <select id="timeFilter">
+            <select id="timeFilter" aria-label="Filter by time">
               <option value="all" data-i18n="allTimes">All times</option>
               <option value="morning">Morning</option>
               <option value="noon">Noon</option>
@@ -98,11 +98,11 @@
           </label>
           <label>
             <span data-i18n="type">Type</span>
-            <select id="categoryFilter"></select>
+            <select id="categoryFilter" aria-label="Filter by type"></select>
           </label>
           <label>
             <span data-i18n="cost">Cost</span>
-            <select id="priceFilter">
+            <select id="priceFilter" aria-label="Filter by cost">
               <option value="all" data-i18n="allCosts">All costs</option>
               <option value="$">$</option>
               <option value="$$">$$</option>
@@ -122,8 +122,9 @@
 
           <section class="route-panel">
             <div id="mapStatus" class="map-status" hidden></div>
+            <div id="routeSummary" class="route-summary" aria-live="polite"></div>
             <div class="map-wrap">
-              <div id="map" class="map-shell" aria-label="Ipoh map"></div>
+              <div id="map" class="map-shell" aria-label="Interactive Ipoh route map" tabindex="0"></div>
               <div class="map-legend" aria-label="Map legend">
                 <span><i class="legend-icon legend-selected">&#8982;</i> <b data-i18n="legendSelected">Selected</b></span>
                 <span><i class="legend-icon legend-nearby">&#10022;</i> <b data-i18n="legendNearby">Nearby place</b></span>
@@ -131,7 +132,7 @@
               </div>
             </div>
 
-            <div class="selected-card" id="selectedCard"></div>
+            <div class="selected-card" id="selectedCard" aria-live="polite"></div>
 
             <div class="nearby-row">
               <div class="graph-card">
@@ -139,7 +140,7 @@
                   <h3 data-i18n="routeGraph">Route graph</h3>
                   <span data-i18n="pointToPoint">Point to point</span>
                 </div>
-                <div id="routeGraph" class="route-graph"></div>
+                <div id="routeGraph" class="route-graph" aria-live="polite"></div>
               </div>
 
               <div class="nearby-card">
@@ -147,7 +148,7 @@
                   <h3 data-i18n="busStops">Nearby bus references</h3>
                   <span>BAS.MY / Pink Bus</span>
                 </div>
-                <div id="busStops" class="bus-list"></div>
+                <div id="busStops" class="bus-list" aria-live="polite"></div>
               </div>
             </div>
           </section>
